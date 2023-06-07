@@ -151,3 +151,11 @@ type Config struct {
 	// Version string
 }
 ```
+
+## Running
+
+### Config from your kubeconfig file
+To look at the config file generated from your kubeconfig path, run the following:
+```
+go run ./kubeConfig/main.go -kubeconfig <PATH_TO_YOUR_KUBECONFIG_FILE>
+```
