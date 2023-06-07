@@ -159,3 +159,6 @@ To look at the config file generated from your kubeconfig path, run the followin
 ```
 go run ./kubeConfig/main.go -kubeconfig <PATH_TO_YOUR_KUBECONFIG_FILE>
 ```
+
+You can also pass in the following flags:
+- protobuf: <boolean> To use the protobuf binary encoding as the content type
