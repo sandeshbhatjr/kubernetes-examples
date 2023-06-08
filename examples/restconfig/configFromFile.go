@@ -3,6 +3,7 @@ package restconfig
 import (
 	"flag"
 	"log"
+	"os"
 	"path/filepath"
 
 	"k8s.io/client-go/rest"
@@ -10,8 +11,18 @@ import (
 	"k8s.io/client-go/util/homedir"
 )
 
+func getDefaultKubeconfigPath() string {
+	// kubeconfig is usually at ~/.kube/config
+	// or the path is provided in the environment variable: KUBECONFIG
+	if path := os.Getenv("KUBECONFIG"); path != "" {
+		return path
+	} else {
+		return filepath.Join(homedir.HomeDir(), ".kube", "config")
+	}
+}
+
 func ConfigFromFlags() rest.Config {
-	defaultKubeconfigPath := filepath.Join(homedir.HomeDir(), ".kube", "config")
+	defaultKubeconfigPath := getDefaultKubeconfigPath()
 	kubeconfig := flag.String("kubeconfig", defaultKubeconfigPath, "Path to the kubeconfig file")
 	flag.Parse()
 
