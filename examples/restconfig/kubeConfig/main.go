@@ -4,13 +4,16 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"path/filepath"
 
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/homedir" // cross platform consistent way to get user home directory
 )
 
 func main() {
 	// load the path to the kubeconfig file
-	kubeconfigPath := flag.String("kubeconfig", "", "Path to your kubeconfig file to load")
+	defaultKubeconfigPath := filepath.Join(homedir.HomeDir(), ".kube", "config")
+	kubeconfigPath := flag.String("kubeconfig", defaultKubeconfigPath, "Path to your kubeconfig file to load")
 	useProtobuf := flag.Bool("protobuf", false, "Use protobuf as the content type")
 	flag.Parse()
 
